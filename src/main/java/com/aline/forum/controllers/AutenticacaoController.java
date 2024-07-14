@@ -1,6 +1,9 @@
 package com.aline.forum.controllers;
 
+import com.aline.forum.infra.security.TokenService;
+import com.aline.forum.models.Usuario;
 import com.aline.forum.records.DadosAutenticacao;
+import com.aline.forum.records.DadosTokenJWT;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +18,17 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity login(@RequestBody @Valid DadosAutenticacao dados) {
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(token);
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var authentication = manager.authenticate(authenticationToken);
 
-        return ResponseEntity.ok().build();
+        var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
+
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
 
     }
 }
