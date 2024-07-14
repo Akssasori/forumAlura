@@ -1,13 +1,17 @@
 package com.aline.forum.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "resposta")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Resposta {
 
     @Id

@@ -1,11 +1,15 @@
 package com.aline.forum.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Table(name = "curso")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Curso {
 
     @Id

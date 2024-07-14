@@ -2,7 +2,7 @@ package com.aline.forum.models;
 
 import com.aline.forum.enums.StatusTopicoEnum;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +10,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "topico")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Topico {
 
     @Id
