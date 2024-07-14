@@ -9,6 +9,6 @@ CREATE TABLE resposta (
   PRIMARY KEY (id),
   KEY `FK_autor_id` (autor_id),
   KEY `FK_topico_id` (topico_id),
-  CONSTRAINT `FK_autor_id` FOREIGN KEY (autor_id) REFERENCES usuario (id),
+  CONSTRAINT `FK_autor_resp_id` FOREIGN KEY (autor_id) REFERENCES usuario (id),
   CONSTRAINT `FK_topico_id` FOREIGN KEY (topico_id) REFERENCES topico (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

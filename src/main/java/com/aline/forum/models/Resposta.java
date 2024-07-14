@@ -25,9 +25,11 @@ public class Resposta {
     private Boolean solucao = false;
 
     @ManyToOne
+    @JoinColumn(name = "topico_id")
     private Topico topico;
 
     @ManyToOne
+    @JoinColumn(name = "autor_id")
     private Usuario autor;
 
 
