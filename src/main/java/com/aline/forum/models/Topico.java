@@ -1,12 +1,15 @@
 package com.aline.forum.models;
 
 import com.aline.forum.enums.StatusTopicoEnum;
+import com.aline.forum.records.TopicoRequestRecord;
+import com.aline.forum.records.TopicoResponseRecord;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "topico")
@@ -42,6 +45,17 @@ public class Topico {
 
     @OneToMany(mappedBy = "topico")
     private List<Resposta> respostas = new ArrayList<>();
+
+    public TopicoResponseRecord topicoToRecord(Topico topico) {
+        return new TopicoResponseRecord(topico.getTitulo(),
+                topico.getMensagem(),
+                topico.getDataCriacao(),
+                topico.getStatus().name(),
+                topico.getAutor().getNome(),
+                topico.getCurso().getNome(),
+                topico.getRespostas().stream().map(Resposta::getMensagem).collect(Collectors.toList()));
+
+    }
 
 
 }
